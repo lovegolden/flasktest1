@@ -1,0 +1,25 @@
+from app import db
+from app.models import User, Post
+# u = User(username='goolden', email='john12@example.com',password_hash='aaa')
+# db.session.add(u)
+# db.session.commit()
+# u = User(username='susanww', email='susan123@example.com',password_hash='aaa')
+# db.session.add(u)
+# db.session.commit()
+# users = User.query.all()
+# print(users)
+# u = User.query.get(1)
+# p = Post(body='my first post!', author=u)
+# db.session.add(p)
+# db.session.commit()
+# users = User.query.all()
+# for u in users:
+#     db.session.delete(u)
+# posts = Post.query.all()
+# for p in posts:
+#     db.session.delete(p)
+# db.session.commit()
+u = User(username='susan', email='susan@example.com')
+u.set_password('mypassword')
+print(u.check_password('anotherpassword'))
+print(u.check_password('mypassword'))
