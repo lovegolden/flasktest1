@@ -1,10 +1,5 @@
 import os
 
-#basedir = os.path.abspath(os.path.dirname(__file__))
-
-#SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
-#D:\flask\flask\db_repository
-#SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 #D:\flask\flask
 basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
@@ -14,3 +9,17 @@ class Config(object):
         'sqlite:///' + os.path.join(basedir, 'app.db')
     #数据库更新时，不通知app
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # 错误日志发送邮箱，不知道QQ邮箱，因为QQ邮箱只要用SSL协议，SMTPHandler不支持SSL
+    # MAIL_SERVER邮箱服务器
+    # MAIL_PORT端口
+    # MAIL_PORT，TLS协议
+    # MAIL_USERNAME，邮箱
+    # MAIL_PASSWORD，短信授权码
+    # ADMINS，收邮箱列表
+    MAIL_SERVER = 'smtp.163.com'
+    MAIL_PORT = 25
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = "love-golden@163.com"
+    MAIL_PASSWORD = "GBIZUICBXHLHUEPK"
+    ADMINS = ['love-golden@163.com']
