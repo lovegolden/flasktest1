@@ -7,9 +7,13 @@ import logging
 from logging.handlers import SMTPHandler
 from logging.handlers import RotatingFileHandler
 import os
+from flask_mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(Config)
+#flask_mail.Mail实例对象
+mail = Mail(app)
+#数据库实例对象
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 #用于保存用户登录设置

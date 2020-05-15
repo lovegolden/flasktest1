@@ -23,3 +23,6 @@ class Config(object):
     MAIL_USERNAME = "love-golden@163.com"
     MAIL_PASSWORD = "GBIZUICBXHLHUEPK"
     ADMINS = ['love-golden@163.com']
+
+    #post分页，每页显示3个post
+    POSTS_PER_PAGE = 3

@@ -4,6 +4,9 @@ from app import db,login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
+from time import time
+import jwt
+from app import app
 
 #多对多辅助表，关注其他用户
 followers = db.Table('followers',
@@ -60,6 +63,23 @@ class User(UserMixin,db.Model):
                 followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Post.timestamp.desc())
+
+    #邮箱验证密码连接，expires_in=600有效时间10分钟，app.config['SECRET_KEY']密匙，algorithm='HS256'加密算法
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    #staticmethod类的静态方法，可直接调用，不用传类参
+    #解密邮箱验证密码，返回字典app.config['SECRET_KEY']
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['reset_password']
+        except:
+            return
+        return User.query.get(id)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
