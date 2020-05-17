@@ -8,9 +8,12 @@ from logging.handlers import SMTPHandler
 from logging.handlers import RotatingFileHandler
 import os
 from flask_mail import Mail
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 app.config.from_object(Config)
+#bootsrap实例
+bootstrap = Bootstrap(app)
 #flask_mail.Mail实例对象
 mail = Mail(app)
 #数据库实例对象

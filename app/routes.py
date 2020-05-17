@@ -86,9 +86,13 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
+    #获得路由参数，默认为1
     page = request.args.get('page', 1, type=int)
+    #paginate数据库的分页功能，
+    #参数，page：从第几页开始，app.config['POSTS_PER_PAGE']：每页页数，False：返回超出范围的空列表
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(
         page, app.config['POSTS_PER_PAGE'], False)
+    #如果posts.has_next为空，返回None
     next_url = url_for('user', username=user.username, page=posts.next_num) \
         if posts.has_next else None
     prev_url = url_for('user', username=user.username, page=posts.prev_num) \
