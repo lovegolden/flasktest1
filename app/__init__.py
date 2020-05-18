@@ -9,6 +9,8 @@ from logging.handlers import RotatingFileHandler
 import os
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -16,6 +18,8 @@ app.config.from_object(Config)
 bootstrap = Bootstrap(app)
 #flask_mail.Mail实例对象
 mail = Mail(app)
+#实例化flask_moment对象，管理时区
+moment = Moment(app)
 #数据库实例对象
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

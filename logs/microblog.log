@@ -68,3 +68,5 @@ jinja2.exceptions.UndefinedError: 'form' is undefined
 2020-05-16 13:13:46,035 INFO: Microblog startup [in D:\flasktest\app\__init__.py:57]
 2020-05-16 23:02:58,937 INFO: Microblog startup [in D:\flasktest\app\__init__.py:57]
 2020-05-17 22:09:34,348 INFO: Microblog startup [in D:\flasktest\app\__init__.py:57]
+2020-05-18 13:51:23,831 INFO: Microblog startup [in D:\flasktest\app\__init__.py:57]
+2020-05-18 14:09:11,015 INFO: Microblog startup [in D:\flasktest\app\__init__.py:61]
