@@ -1,13 +1,67 @@
-2020-05-12 10:19:54,934 ERROR: Exception on /register [POST] [in D:\flasktest\venv\lib\site-packages\flask\app.py:1892]
+2020-05-25 14:52:29,531 ERROR: Exception on /favicon.ico [GET] [in D:\flasktest\venv\lib\site-packages\flask\app.py:1892]
 Traceback (most recent call last):
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1248, in _execute_context
-    cursor, statement, parameters, context
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\default.py", line 590, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.IntegrityError: UNIQUE constraint failed: user.username
+  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1926, in dispatch_request
+    self.raise_routing_exception(req)
+  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1908, in raise_routing_exception
+    raise request.routing_exception
+  File "D:\flasktest\venv\lib\site-packages\flask\ctx.py", line 350, in match_request
+    result = self.url_adapter.match(return_rule=True)
+  File "D:\flasktest\venv\lib\site-packages\werkzeug\routing.py", line 1945, in match
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
 
-The above exception was the direct cause of the following exception:
+During handling of the above exception, another exception occurred:
 
+Traceback (most recent call last):
+  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1816, in handle_user_exception
+    return self.handle_http_exception(e)
+  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1744, in handle_http_exception
+    return handler(e)
+  File "D:\flasktest\app\errors\handlers.py", line 8, in not_found_error
+    return render_template('errors/404.html'), 404
+  File "D:\flasktest\venv\lib\site-packages\flask\templating.py", line 140, in render_template
+    ctx.app,
+  File "D:\flasktest\venv\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "D:\flasktest\venv\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "D:\flasktest\venv\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "D:\flasktest\venv\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "D:\flasktest\app\templates\errors\404.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "D:\flasktest\app\templates\base.html", line 1, in top-level template code
+    {% extends 'bootstrap/base.html' %}
+  File "D:\flasktest\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "D:\flasktest\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 4, in block "doc"
+    {%- block html %}
+  File "D:\flasktest\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 20, in block "html"
+    {% block body -%}
+  File "D:\flasktest\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 21, in block "body"
+    {% block navbar %}
+  File "D:\flasktest\app\templates\base.html", line 17, in block "navbar"
+    <a class="navbar-brand" href="{{ url_for('index') }}">Microblog</a>
+  File "D:\flasktest\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "D:\flasktest\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "D:\flasktest\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\flasktest\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'index'. Did you mean 'auth.index' instead?
+2020-05-25 15:01:22,166 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 15:02:00,015 ERROR: Exception on /auth/index [GET] [in D:\flasktest\venv\lib\site-packages\flask\app.py:1892]
 Traceback (most recent call last):
   File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
     response = self.full_dispatch_request()
@@ -21,130 +75,32 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "D:\flasktest\app\routes.py", line 62, in register
-    db.session.commit()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\scoping.py", line 162, in do
-    return getattr(self.registry(), name)(*args, **kwargs)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1036, in commit
-    self.transaction.commit()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 503, in commit
-    self._prepare_impl()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 482, in _prepare_impl
-    self.session.flush()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2496, in flush
-    self._flush(objects)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2637, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 69, in __exit__
-    exc_value, with_traceback=exc_tb,
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
-    raise exception
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2597, in _flush
-    flush_context.execute()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 422, in execute
-    rec.execute(self)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 589, in execute
-    uow,
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 245, in save_obj
-    insert,
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1136, in _emit_insert_statements
-    statement, params
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 984, in execute
-    return meth(self, multiparams, params)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 293, in _execute_on_connection
-    return connection._execute_clauseelement(self, multiparams, params)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1103, in _execute_clauseelement
-    distilled_params,
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1288, in _execute_context
-    e, statement, parameters, cursor, context
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1482, in _handle_dbapi_exception
-    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
-    raise exception
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1248, in _execute_context
-    cursor, statement, parameters, context
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\default.py", line 590, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username
-[SQL: INSERT INTO user (username, email, password_hash, about_me, last_seen) VALUES (?, ?, ?, ?, ?)]
-[parameters: ('123', '123123@qq.com', 'pbkdf2:sha256:150000$EDB3tDPN$3b08c78809a4a5c3a5ca9791a04be97417202f62c0973bc6e0ced93a8c6278ae', None, '2020-05-12 02:19:54.934000')]
-(Background on this error at: http://sqlalche.me/e/gkpj)
-2020-05-12 10:24:04,131 INFO: Microblog startup [in D:\flasktest\app\__init__.py:50]
-2020-05-12 10:24:20,131 ERROR: Exception on /register [POST] [in D:\flasktest\venv\lib\site-packages\flask\app.py:1892]
-Traceback (most recent call last):
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1248, in _execute_context
-    cursor, statement, parameters, context
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\default.py", line 590, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.IntegrityError: UNIQUE constraint failed: user.username
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1821, in handle_user_exception
+  File "D:\flasktest\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "D:\flasktest\app\auth\routes.py", line 37, in index
+    if posts.has_next else None
+  File "D:\flasktest\venv\lib\site-packages\flask\helpers.py", line 370, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 2216, in handle_url_build_error
     reraise(exc_type, exc_value, tb)
   File "D:\flasktest\venv\lib\site-packages\flask\_compat.py", line 39, in reraise
     raise value
-  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "D:\flasktest\venv\lib\site-packages\flask\app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "D:\flasktest\app\routes.py", line 62, in register
-    db.session.commit()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\scoping.py", line 162, in do
-    return getattr(self.registry(), name)(*args, **kwargs)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 1036, in commit
-    self.transaction.commit()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 503, in commit
-    self._prepare_impl()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 482, in _prepare_impl
-    self.session.flush()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2496, in flush
-    self._flush(objects)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2637, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 69, in __exit__
-    exc_value, with_traceback=exc_tb,
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
-    raise exception
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2597, in _flush
-    flush_context.execute()
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 422, in execute
-    rec.execute(self)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 589, in execute
-    uow,
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 245, in save_obj
-    insert,
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1136, in _emit_insert_statements
-    statement, params
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 984, in execute
-    return meth(self, multiparams, params)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 293, in _execute_on_connection
-    return connection._execute_clauseelement(self, multiparams, params)
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1103, in _execute_clauseelement
-    distilled_params,
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1288, in _execute_context
-    e, statement, parameters, cursor, context
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1482, in _handle_dbapi_exception
-    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\util\compat.py", line 178, in raise_
-    raise exception
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1248, in _execute_context
-    cursor, statement, parameters, context
-  File "D:\flasktest\venv\lib\site-packages\sqlalchemy\engine\default.py", line 590, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username
-[SQL: INSERT INTO user (username, email, password_hash, about_me, last_seen) VALUES (?, ?, ?, ?, ?)]
-[parameters: ('123', '123123@qq.com', 'pbkdf2:sha256:150000$Jef3iYEW$0fd65fed927c21593e371439c725fa505f724e8d21e4fd4db3fde0f690a2ebf9', None, '2020-05-12 02:24:20.131000')]
-(Background on this error at: http://sqlalche.me/e/gkpj)
-2020-05-12 14:07:11,712 INFO: Microblog startup [in D:\flasktest\app\__init__.py:50]
-2020-05-12 14:07:35,856 INFO: Microblog startup [in D:\flasktest\app\__init__.py:50]
-2020-05-13 14:29:13,390 INFO: Microblog startup [in D:\flasktest\app\__init__.py:50]
-2020-05-13 14:58:14,771 INFO: Microblog startup [in D:\flasktest\app\__init__.py:50]
-2020-05-13 15:12:14,021 INFO: Microblog startup [in D:\flasktest\app\__init__.py:50]
-2020-05-14 09:36:42,412 INFO: Microblog startup [in D:\flasktest\app\__init__.py:50]
-2020-05-14 09:36:48,641 INFO: Microblog startup [in D:\flasktest\app\__init__.py:50]
+  File "D:\flasktest\venv\lib\site-packages\flask\helpers.py", line 358, in url_for
+    endpoint, values, method=method, force_external=external
+  File "D:\flasktest\venv\lib\site-packages\werkzeug\routing.py", line 2179, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'index' with values ['page']. Did you mean 'auth.index' instead?
+2020-05-25 15:02:31,142 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 15:38:32,375 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 15:38:51,707 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 15:43:26,358 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 15:45:05,332 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 15:49:32,889 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 15:50:44,680 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 15:52:28,939 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 16:02:37,169 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-05-25 16:06:20,956 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-06-01 13:46:08,944 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-06-01 13:54:58,217 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-06-01 13:58:29,416 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]
+2020-06-01 14:24:48,382 INFO: Microblog startup [in D:\flasktest\app\__init__.py:74]

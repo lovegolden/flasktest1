@@ -6,7 +6,7 @@ from flask_login import UserMixin
 from hashlib import md5
 from time import time
 import jwt
-from app import app
+from flask import current_app
 
 #多对多辅助表，关注其他用户
 followers = db.Table('followers',
@@ -68,14 +68,14 @@ class User(UserMixin,db.Model):
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
-            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+            current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     #staticmethod类的静态方法，可直接调用，不用传类参
     #解密邮箱验证密码，返回字典app.config['SECRET_KEY']
     @staticmethod
     def verify_reset_password_token(token):
         try:
-            id = jwt.decode(token, app.config['SECRET_KEY'],
+            id = jwt.decode(token, current_app.config['SECRET_KEY'],
                             algorithms=['HS256'])['reset_password']
         except:
             return
